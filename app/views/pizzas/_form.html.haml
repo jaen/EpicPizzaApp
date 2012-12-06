@@ -1,0 +1,11 @@
+= semantic_form_for @pizza do |f|
+  = f.inputs do
+    = f.input :name
+    = f.input :description
+    %h3 Ingredients
+    #ingredients
+      = f.semantic_fields_for :ingredient_associations do |ingredient|
+        = render 'ingredient_association_fields', :f => ingredient
+      = link_to_add_association "Add an ingredient", f, :ingredient_associations, :class => 'btn btn-primary'
+    = f.actions do
+      = f.action :submit, :button_html => { :class => 'btn btn-success' }

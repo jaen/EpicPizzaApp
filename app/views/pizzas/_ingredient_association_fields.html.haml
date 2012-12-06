@@ -1,0 +1,5 @@
+.nested-fields
+  = f.inputs :name => 'Ingredient' do
+    = f.input :ingredient
+    = f.input :quantity
+    = link_to_remove_association "Remove this ingredient", f, :class => 'btn btn-danger'

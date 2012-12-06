@@ -1,0 +1,18 @@
+- if @order
+  %table
+    %tr
+      %th Name
+      %th Qty
+      %th Price
+    - @order.elements.each do |element|
+      %tr
+        %td element.name
+        %td element.quanitity
+        %td element.total_price
+    %tr
+      %td
+      %tb
+        %b Total:
+      %td @order.price
+- else
+  You have no open order

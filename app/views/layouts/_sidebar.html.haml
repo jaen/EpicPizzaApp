@@ -1,0 +1,18 @@
+.well
+  %h5 Your Order
+  - if user_signed_in?
+    = render 'layouts/order'
+  - else
+    You need to be logged in to order:
+
+    = form_tag user_session_path do
+      = text_field_tag 'user[email]', "", :placeholder => 'Username'
+      = password_field_tag 'user[password]', "",  :placeholder => 'Password'
+      %br/
+      = check_box_tag 'user[remember_me]'
+      = label_tag 'user[remember_me]', 'Remember me'
+      %button.btn.btn-primary Sign in
+      %br/
+      = link_to "Sign up", new_user_registration_path
+      %br/
+      = link_to "Forgot your password?", new_password_path('user')

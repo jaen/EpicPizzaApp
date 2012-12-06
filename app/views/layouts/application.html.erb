@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EpicPizzaApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">      
+        <a class="brand" href="/">EpicPizzaApp</a>
+        <ul class="nav">
+          <li><%= link_to "Pizzas", pizzas_path %></li>
+          <li><%= link_to "Ingredients", ingredients_path if can? :manage, Ingredient %></li>
+          <li><%= link_to "Orders", orders_path if can? :manage, Order %></li>
+        </ul>
+        <div class="container-fluid pull-right">
+          <ul class="nav">
+            <% if current_user && current_user.admin? then %>
+              <li><a href="#" style="color: red;">JESTĘ ADMINĘ</a></li>
+            <% end %>
+            <li><%= if user_signed_in? then link_to("Logout", destroy_user_session_path, :method => :delete) else link_to("Login", new_user_session_path) end %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+  <% if notice then %>
+    <div class="alert alert-info">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <%= notice %>
+    </div>
+  <% end%>
+  <% if alert then %>
+    <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <%= alert %>
+    </div>
+  <% end%>  
+  <div class="row-fluid">
+    <% if @display_sidebar then %>
+      <div class="span3">
+        <!--Sidebar content-->
+        <%= render 'layouts/sidebar' %>
+      </div>
+    <% end %>
+    <div class=<%= @display_sidebar  ? "span9" : "span12" %>>
+      <!--Body content-->
+      <%= yield %>
+    </div>
+  </div>  
+
+  <hr />
+  <footer>
+    EpicPizzaApp, 2012
+  <footer>
+</div>
+</body>
+</html>

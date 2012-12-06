@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @pizza.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @pizza.description %>
+</p>
+
+<p>
+  <b>Ingredients:</b>
+  <table class="table">
+  		<tr>
+	  		<th>Name</th>
+	  		<th>Quantity</th>
+	  		<th>Total Price</th>
+	  	</tr>
+		  <%- @pizza.ingredient_associations.each do |ia| %>
+		  	<tr>
+			  	<td><%= ia.ingredient.name %></td>
+			  	<td><%= ia.quantity %></td>
+			  	<td><%= ia.total_price %></td>
+		  	</tr>
+		  <% end %>
+  		<td></td>
+  		<td><b>Price:</b></td>
+  		<td><%= @pizza.price %></td>
+	</tbody>
+  </table>
+</p>
+
+<%= link_to 'Edit', edit_pizza_path(@pizza), :class => 'btn btn-success' %>
+<%= link_to 'Back', pizzas_path, :class => 'btn btn-warning' %>
