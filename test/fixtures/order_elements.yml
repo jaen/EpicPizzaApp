@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  order.references: MyString
+  pizza.references: MyString
+  quantity.integer: MyString
+
+two:
+  order.references: MyString
+  pizza.references: MyString
+  quantity.integer: MyString

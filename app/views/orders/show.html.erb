@@ -1,0 +1,31 @@
+<p>
+  <b>User:</b>
+  <%= @order.user.username %>
+</p>
+
+<p>
+  <b>Pizzas:</b>
+  <ul>
+    <% @order.order_elements.each do |element| %>
+      <li><%= "#{element.pizza.name} (#{element.quantity})" %></li>
+      <ul>
+        <% element.pizza.ingredient_associations.each do |ia| %>
+          <li><%= "#{ia.ingredient.name} (#{element.quantity})" %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @order.status %>
+</p>
+
+<% if @order.status == :made then %>
+  <%= link_to 'Pay', pay_order_path(@order), :method => :post, :class => 'btn btn-success' %>
+<% end %>
+<% if @order.status == :paid and can? :deliver, @order then %>
+  <%= link_to 'Deliver', deliver_order_path(@order), :method => :post, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-success' %>
+<% end %>
+<%= link_to 'Back', orders_path, :class => 'btn btn-warning' %>

@@ -4,7 +4,18 @@ EpicPizzaApp::Application.routes.draw do
   root :to => 'home_controller#index'
 
   resources :ingredients
-  resources :pizzas
+  resources :pizzas do
+    member do
+      post 'order'
+    end
+  end
+  resources :orders do
+    member do
+      post 'make'
+      post 'pay'
+      post 'deliver'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -6,7 +6,11 @@ class IngredientAssociation < ActiveRecord::Base
   				  :pizza_id,
   				  :ingredient_id
 
-  validates :quantity, :presence => true, :numericality => { :only_integer => true }
+  validates :quantity, :presence => true,
+                       :numericality => { :only_integer => true,
+                                          :greater_than => 0 }
+  validates :pizza, :presence => true
+  validates :ingredient, :presence => true
 
   def total_price
   	quantity * ingredient.price

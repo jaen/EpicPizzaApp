@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  pizza: 
+  quantity: 1
+  status_cd: 1
+
+two:
+  user: 
+  pizza: 
+  quantity: 1
+  status_cd: 1

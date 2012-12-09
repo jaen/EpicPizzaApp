@@ -1,0 +1,27 @@
+<h1>Listing orders</h1>
+
+<table class="table">
+  <tr>
+    <th>User</th>
+    <th>Pizzas</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @orders.each do |order| %>
+  <tr>
+    <td><%= order.user.username %></td>
+    <td><%= order.order_elements.map { |el| "#{el.pizza.name} (#{el.quantity})"}.join(', ') %></td>
+    <td><%= order.status %></td>
+    <td><%= link_to 'Show', order, :class => 'btn btn-primary' %></td>
+    <td><%= if order.status == :paid then link_to 'Deliver', deliver_order_path(order), :method => :post, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-success' end %></td>
+    <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Order', new_order_path, :class => 'btn btn-primary' %>

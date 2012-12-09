@@ -1,18 +1,28 @@
-- if @order
-  %table
+- if @users_order
+  %table.table
     %tr
       %th Name
       %th Qty
       %th Price
-    - @order.elements.each do |element|
+    - @users_order.order_elements.each do |element|
       %tr
-        %td element.name
-        %td element.quanitity
-        %td element.total_price
+        %td= element.pizza.name
+        %td= element.quantity
+        %td= element.total_price
     %tr
       %td
-      %tb
+      %td
         %b Total:
-      %td @order.price
+      %td= @users_order.total_price
+  - case @users_order.status
+    - when :open
+      = link_to make_order_path(@users_order), :method => :post, :class => 'btn btn-success' do
+        Make order
+    - when :made
+      = link_to pay_order_path(@users_order), :method => :post, :class => 'btn btn-success' do
+        Pay
+    - when :paid
+      %b
+        Your order has been paid, please wait for it to be delivered
 - else
   You have no open order

@@ -35,9 +35,12 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-gem 'pry'
+gem 'pry-rails'
+gem 'pry-doc'
 gem 'debugger'
-gem 'jazz_hands'
+gem 'pry-debugger'
+gem 'pry-stack_explorer'
+#gem 'jazz_hands'
 
 # dodatkow gemy
 

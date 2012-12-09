@@ -15,7 +15,7 @@
         <ul class="nav">
           <li><%= link_to "Pizzas", pizzas_path %></li>
           <li><%= link_to "Ingredients", ingredients_path if can? :manage, Ingredient %></li>
-          <li><%= link_to "Orders", orders_path if can? :manage, Order %></li>
+          <li><%= link_to "Orders", orders_path if can? :index, Order %></li>
         </ul>
         <div class="container-fluid pull-right">
           <ul class="nav">
@@ -31,18 +31,9 @@
   <br />
   <br />
   <br />
-  <% if notice then %>
-    <div class="alert alert-info">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <%= notice %>
-    </div>
-  <% end%>
-  <% if alert then %>
-    <div class="alert alert-error">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <%= alert %>
-    </div>
-  <% end%>  
+  <div id="notices">
+    <%= render 'layouts/notices' %>
+  </div>
   <div class="row-fluid">
     <% if @display_sidebar then %>
       <div class="span3">

@@ -9,12 +9,13 @@ class ApplicationController < ActionController::Base
   end
 
   def display_sidebar?
-    @display_sidebar = true
+    @display_sidebar = can? :make, Order
   end
 
   def get_order
     if current_user then
-      @order = current_user.has_open_order?
+      last_order = current_user.orders.last
+      @users_order = last_order if last_order && last_order.status != :closed
     end
   end
 end

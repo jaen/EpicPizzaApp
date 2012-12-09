@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203211908) do
+ActiveRecord::Schema.define(:version => 20121206100200) do
 
   create_table "ingredient_associations", :force => true do |t|
     t.integer  "pizza_id"
@@ -30,6 +30,26 @@ ActiveRecord::Schema.define(:version => 20121203211908) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "order_elements", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "pizza_id"
+    t.integer  "quantity"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "orders", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "pizza_id"
+    t.integer  "quantity"
+    t.integer  "status_cd",  :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "orders", ["pizza_id"], :name => "index_orders_on_pizza_id"
+  add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "pizzas", :force => true do |t|
     t.string   "name"

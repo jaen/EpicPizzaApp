@@ -8,6 +8,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @pizzas.each do |pizza| %>
@@ -17,7 +18,12 @@
     <td><%= pizza.price %></td>
     <td><%= link_to 'Show', pizza, :class => 'btn btn-primary' %></td>
     <td><%= link_to 'Edit', edit_pizza_path(pizza), :class => 'btn btn-success' %></td>
-    <td><%= link_to 'Destroy', pizza, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
+    <td><%= if can? :destroy, pizza then (link_to 'Destroy', pizza, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger') end %></td>
+    <td>
+      <% if can? :make, Order then %>
+        <%= render :partial => 'orders/inline_order', :locals => { :pizza => pizza } %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
